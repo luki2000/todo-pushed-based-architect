@@ -1,7 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from '../models/todo/todo.model';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'content-type': 'application/json' }),
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +18,19 @@ export class TodoService {
   
   constructor(private http: HttpClient) { }
 
-  public addTodo(todo: Todo) {
-    return this.http.post(`${this.baseUrl}todos`, todo);
+  public addTodo(task: string) {
+    const todo: Todo = {
+      id: Math.floor(Math.random() * 100),
+      title: task,
+      userId: 1,
+      completed: false
+    }
+    console.log('add todo...')
+    console.table(todo);
+
+    const body = JSON.stringify(todo)
+
+    return this.http.post(`${this.baseUrl}todos`, todo, httpOptions);
   }
 
   public getTodos(): Observable<Todo[]> {

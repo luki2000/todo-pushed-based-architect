@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   // text input to add todos
   addTodo(task: string) {
-    console.log('current task', task);
+    this.todoService.addTodo(task);
   }
 
   // display list of todos
