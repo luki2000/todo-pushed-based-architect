@@ -8,28 +8,8 @@ import { TodoService } from './services/todo.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  public $todos: Observable<Todo[]> | null = null;
-
-  constructor(private todoService: TodoService){}
-
-  ngOnInit() {
-    this.$todos = this.todoService.getTodos();
-  }
-
-  // text input to add todos
-  addTodo(task: string) {
-    this.todoService.addTodo(task);
-  }
-
-  // display list of todos
-
-  // delete a todo
-  deleteTodo(id: number) {
-    this.todoService.deleteTodo(id);
-  }
-
-  // update a todo 
+  constructor(){}
 
 }

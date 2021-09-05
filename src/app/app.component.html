@@ -1,15 +1,1 @@
-<input #todoInput type="text" />
-
-<button
-  (click)="addTodo(todoInput.value)"
->Add to do</button>
-
-
-<ng-container *ngIf="($todos | async) as todos">
-  <ul>
-    <li *ngFor="let todo of todos">
-      {{todo.title}}
-      <span style="color: red;" (click)="deleteTodo(todo.id)">  X</span>
-    </li>
-  </ul>
-</ng-container>
+<router-outlet></router-outlet>

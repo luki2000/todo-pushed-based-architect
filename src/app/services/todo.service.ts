@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from '../models/todo/todo.model';
+import { pluck, share, shareReplay, tap } from 'rxjs/operators';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'content-type': 'application/json'}),
@@ -29,14 +31,17 @@ export class TodoService {
   }
 
   public getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.baseUrl}todos`);
+    return this.http.get<Todo[]>(`${this.baseUrl}todos`)
+      .pipe(
+        shareReplay()
+      );
   }
-
-  /*public updateTodo(id: number, todo: Todo) {
-    return this.http.put(`${this.baseUrl}todos/${id}`, todo).subscribe();
-  }*/
 
   public deleteTodo(id: number) {
     this.http.delete(`${this.baseUrl}todos/${id}`).subscribe();
   }
+
+    /*public updateTodo(id: number, todo: Todo) {
+    return this.http.put(`${this.baseUrl}todos/${id}`, todo).subscribe();
+  }*/
 }
