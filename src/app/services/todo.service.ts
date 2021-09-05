@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Todo } from '../models/todo/todo.model';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'content-type': 'application/json' }),
+  headers: new HttpHeaders({ 'content-type': 'application/json'}),
 };
 
 
@@ -12,7 +12,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  baseUrl: string = 'https://jsonplaceholder.typicode.com/';
+  baseUrl: string = 'http://localhost:3000/';
 
 
   
@@ -25,23 +25,18 @@ export class TodoService {
       userId: 1,
       completed: false
     }
-    console.log('add todo...')
-    console.table(todo);
-
-    const body = JSON.stringify(todo)
-
-    return this.http.post(`${this.baseUrl}todos`, todo, httpOptions);
+    this.http.post(`${this.baseUrl}todos`, todo, httpOptions).subscribe();
   }
 
   public getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${this.baseUrl}todos`);
   }
 
-  public updateTodo(id: number, todo: Todo): Observable<Todo[]> {
-    return this.http.put<Todo[]>(`${this.baseUrl}todos/${id}`, todo);
-  }
+  /*public updateTodo(id: number, todo: Todo) {
+    return this.http.put(`${this.baseUrl}todos/${id}`, todo).subscribe();
+  }*/
 
-  public deleteTodo(id: number): Observable<Todo[]> {
-    return this.http.delete<Todo[]>(`${this.baseUrl}todos/${id}`);
+  public deleteTodo(id: number) {
+    this.http.delete(`${this.baseUrl}todos/${id}`).subscribe();
   }
 }

@@ -9,6 +9,7 @@
   <ul>
     <li *ngFor="let todo of todos">
       {{todo.title}}
+      <span style="color: red;" (click)="deleteTodo(todo.id)">  X</span>
     </li>
   </ul>
 </ng-container>

@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
   // display list of todos
 
   // delete a todo
+  deleteTodo(id: number) {
+    this.todoService.deleteTodo(id);
+  }
 
   // update a todo 
 
